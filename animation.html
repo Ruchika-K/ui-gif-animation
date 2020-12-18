@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flipkart</title>
+  <link rel="stylesheet" type="text/css" href="./styles/flex.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+  <header>
+    <div class="header">
+<h1>Flipkart</h1>
+</div>
+    <div class="topnav">
+      <ul class="main-nav">
+        <a href="">Electronics</a>
+          <a href="">Fashion</a>
+          <a href="">Food</a>
+          <a href="">Sports</a>
+      </ul>
+    </div>
+  </header>
+
+
+<script>
+
+    var iconPostionCss = "#picAIcon {position: relative;top: ypospx;left: xpospx;};"
+
+
+
+         var settings = {
+           "async": true,
+           "crossDomain": true,
+           "url": "http://localhost:7000/getImage",
+           "method": "GET"
+         }
+
+         $.ajax(settings).done(function (response) {
+           console.log(response);
+
+           var parentImageUrl = response.parentImageUrl;
+           var finalParentImageUrl = parentImageUrl.replace("{@width}",500).replace("{@height}",500).replace("{@quality}",100);
+            var iconImageUrl = response.iconImageUrl;
+           var finalIconImageUrl = iconImageUrl.replace("{@width}",50).replace("{@height}",50).replace("{@quality}",100);
+           var xpos = response.x;
+           var ypos = response.y;
+           var cssAnimationString = response.iconCssScript;
+           var styleSheet1 = document.createElement("style")
+      styleSheet1.type = "text/css"
+      styleSheet1.innerText = cssAnimationString
+      document.body.appendChild(styleSheet1)
+      var finalIconPostionCss = iconPostionCss.replace("xpos",xpos).replace("ypos",ypos)
+      var styleSheet2 = document.createElement("style")
+      styleSheet2.type = "text/css"
+      styleSheet2.innerText = finalIconPostionCss
+      document.body.appendChild(styleSheet2)
+
+           $("#picA").attr('src',finalParentImageUrl);
+            $("#picAIcon").attr('src',finalIconImageUrl);
+         });
+ </script>
+ <script>
+        var settings = {
+           "async": true,
+           "crossDomain": true,
+           "url": "http://localhost:7000/getImage",
+           "method": "GET"
+         }
+
+         $.ajax(settings).done(function (response) {
+           console.log(response);
+
+           var content = response.parentImageUrl;
+           var finalUrl = content.replace("{@width}",500).replace("{@height}",500).replace("{@quality}",100)
+           $("#picB").attr('src',finalUrl);
+         });
+ </script>
+
+<div class="outer-grid">
+<div class="inner-grid">
+
+<img id="picA" src="">
+<img id="picAIcon" src=""/>
+<img id="picB" src=""/>
+
+
+<!-- </div>
+<div class="inner-grid">
+<img src="http://rukminim1.flixcart.com/image/500/500/cf-ce-prod4/194816259c725697860249df61a57314.JPEG?q=100"/>
+<img src="http://rukminim1.flixcart.com/image/500/500/cf-ce-prod10/61acbed5e168d73646d554ad19f98aa4.JPEG?q=100"/>
+ </div>
+<div class="inner-grid">
+<img src="http://rukminim1.flixcart.com/image/500/500/cf-ce-prod8/ed79cd2d1912783650308f16a3dcb226.JPEG"/>
+<img src="http://rukminim1.flixcart.com/image/500/500/cf-ce-prod2/6e3161d6cc1293372bfecf4269d0922b.JPEG"/>
+</div> -->
+</div>
+  
+</body>
+</html>

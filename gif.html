@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flipkart</title>
+  <link rel="stylesheet" type="text/css" href="./styles/_720x720.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+  <header>
+    <div class="header">
+<h1>Flipkart</h1>
+</div>
+    <div class="topnav">
+      <ul class="main-nav">
+        <a href="">Electronics</a>
+          <a href="">Fashion</a>
+          <a href="">Food</a>
+          <a href="">Sports</a>
+      </ul>
+    </div>
+  </header>
+
+
+ <script>
+        var settings = {
+           "async": true,
+           "crossDomain": true,
+           "url": "http://localhost:7000/getImage",
+           "method": "GET"
+         }
+
+         $.ajax(settings).done(function (response) {
+           console.log(response);
+
+           var content = response.parentImageUrl;
+           var finalUrl = content.replace("{@width}",500).replace("{@height}",500).replace("{@quality}",100)
+           $("#picA").attr('src',finalUrl);
+         });
+ </script>
+ <script>
+        var settings = {
+           "async": true,
+           "crossDomain": true,
+           "url": "http://localhost:7000/getImage",
+           "method": "GET"
+         }
+
+         $.ajax(settings).done(function (response) {
+           console.log(response);
+
+           var content = response.parentImageUrl;
+           var finalUrl = content.replace("{@width}",500).replace("{@height}",500).replace("{@quality}",100)
+           $("#picB").attr('src',finalUrl);
+         });
+ </script>
+
+<div class="outer-grid">
+<div class="inner-grid">
+
+<img id="picA" src="">
+<img id="picB" src=""/>
+<!-- <img src="https://images.pexels.com/photos/1083822/pexels-photo-1083822.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"/> -->
+</div>
+</div>
+<div class="inner-grid">
+<img src="http://rukminim1.flixcart.com/image/500/500/cf-ce-prod4/194816259c725697860249df61a57314.JPEG?q=100"/>
+<img src="http://rukminim1.flixcart.com/image/500/500/cf-ce-prod10/61acbed5e168d73646d554ad19f98aa4.JPEG?q=100"/>
+ </div>
+<div class="inner-grid">
+<img src="http://rukminim1.flixcart.com/image/500/500/cf-ce-prod8/ed79cd2d1912783650308f16a3dcb226.JPEG"/>
+<img src="http://rukminim1.flixcart.com/image/500/500/cf-ce-prod2/6e3161d6cc1293372bfecf4269d0922b.JPEG"/>
+</div>
+</div>
+  
+</body>
+</html>
